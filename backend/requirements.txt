@@ -2,5 +2,5 @@ Flask==3.0.3
 Flask-Cors==4.0.1
 gunicorn==21.2.0
 requests==2.32.3
-pandas==2.2.2       # For CSV parsing (if needed)
+pandas==2.2.3       # For CSV parsing (if needed)
 python-dotenv==1.0.1 # For environment variables
