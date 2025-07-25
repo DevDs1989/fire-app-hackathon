@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import LocomotiveScrollWrapper from "@/components/LocomotiveScroll";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/ui/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +28,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html  lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
         <LocomotiveScrollWrapper>
           <div className="grayscale-100w-full pointer-events-none fixed inset-0 -z-10 h-full opacity-20 grayscale-100 contrast-more:contrast-125">
             <Image
@@ -44,7 +51,9 @@ export default function RootLayout({
           <Navbar />
 
           {children}
+          <Toaster position="top-center"/>
         </LocomotiveScrollWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

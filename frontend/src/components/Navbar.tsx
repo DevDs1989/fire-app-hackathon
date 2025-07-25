@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/popover";
 import type { NavigationLink } from "@/types";
 import { usePathname } from "next/navigation";
-
+import  {ModeToggle} from "@/components/mode-toggle";
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks: NavigationLink[] = [
   { href: "/", label: "Home", active: true },
@@ -118,6 +118,10 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
+          {/* Mode toggle */}
+          <div className="hidden md:block">
+            <ModeToggle />
+          </div>
           <Button asChild variant="ghost" size="sm" className="text-sm">
             <a href="#">Sign In</a>
           </Button>
