@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "nodeNext",
+    "esModuleInterop": true,
+    "target": "es2020",
+    "moduleResolution": "nodeNext",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "lib": ["es2015"]
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "dist"
+  ]
+}

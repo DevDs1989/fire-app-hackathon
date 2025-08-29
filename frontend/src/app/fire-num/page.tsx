@@ -24,7 +24,7 @@ const FireNumberPage: React.FC = () => {
   const [projections, setProjections] = useState<
     { year: number; savings: number }[]
   >([]);
-  const MonthyIncomeRef = React.useRef<HTMLInputElement>(null);
+  const MonthlyIncomeRef = React.useRef<HTMLInputElement>(null);
   const MonthlyExpensesRef = React.useRef<HTMLInputElement>(null);
   const AnnualReturnRateRef = React.useRef<HTMLInputElement>(null);
 
@@ -32,16 +32,16 @@ const FireNumberPage: React.FC = () => {
     setError(null);
     setResult(null);
     setProjections([]);
-    const monthly_income = MonthyIncomeRef.current?.value;
-    const monthly_expenses = MonthlyExpensesRef.current?.value;
-    const return_rate = AnnualReturnRateRef.current?.value;
 
-    // Basic validation
+    const monthlyIncome = MonthlyIncomeRef.current?.value;
+    const monthlyExpenses = MonthlyExpensesRef.current?.value;
+    const returnRate = AnnualReturnRateRef.current?.value;
+
     if (
-      !monthly_income ||
-      !monthly_expenses ||
-      Number(monthly_income) < 0 ||
-      Number(monthly_expenses) < 0
+      !monthlyIncome ||
+      !monthlyExpenses ||
+      Number(monthlyIncome) < 0 ||
+      Number(monthlyExpenses) < 0
     ) {
       setError("Please enter valid positive numbers for income and expenses.");
       return;
@@ -49,17 +49,19 @@ const FireNumberPage: React.FC = () => {
 
     try {
       const response = await axios.post("/fire", {
-        monthly_income: Number(monthly_income),
-        monthly_expenses: Number(monthly_expenses),
-        return_rate: return_rate ? Number(return_rate) / 100 : undefined, // Convert percent to decimal
+        monthly_income: Number(monthlyIncome),
+        monthly_expenses: Number(monthlyExpenses),
+        return_rate: returnRate ? Number(returnRate) / 100 : undefined,
       });
-      const { fire_number, years_to_fire, projections } = response.data;
+
+      const { fireNumber, yearsToFire, projections } = response.data;
 
       setResult(
-        `Your FIRE number is $${fire_number.toLocaleString(undefined, {
+        `Your FIRE number is $${fireNumber.toLocaleString(undefined, {
           maximumFractionDigits: 2,
-        })}. Estimated years to FIRE: ${years_to_fire}.`,
+        })}. Estimated years to FIRE: ${yearsToFire}.`,
       );
+
       setProjections(projections || []);
     } catch (err: any) {
       if (err?.response?.data?.error) {
@@ -100,7 +102,7 @@ const FireNumberPage: React.FC = () => {
               value: "Savings ($)",
               angle: -90,
               position: "left", // Changed from "insideLeft" to "left"
-              offset: 40,
+              offset: 20,
               style: { textAnchor: "middle" },
             }}
             tickFormatter={(v) => `$${v.toLocaleString()}`}
@@ -156,7 +158,7 @@ const FireNumberPage: React.FC = () => {
                 Monthly Income
               </label>
               <Input
-                ref={MonthyIncomeRef}
+                ref={MonthlyIncomeRef}
                 id="monthlyIncome"
                 type="number"
                 placeholder="Enter your monthly income"

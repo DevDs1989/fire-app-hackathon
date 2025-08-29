@@ -13,11 +13,12 @@ import {
 } from "@/components/ui/popover";
 import type { NavigationLink } from "@/types";
 import { usePathname } from "next/navigation";
-import  {ModeToggle} from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks: NavigationLink[] = [
   { href: "/", label: "Home", active: true },
   { href: "/features", label: "Features" },
+  { href: "/fire-num", label: "Fire Number Calculator" },
 ];
 
 export default function Navbar() {
